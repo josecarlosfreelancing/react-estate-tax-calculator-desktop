@@ -1,0 +1,24 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:default="clr-namespace:EstateView.Themes.Default"
+    xmlns:converter="clr-namespace:EstateView.Converter"
+    xmlns:view="clr-namespace:EstateView.View" xmlns:controls="clr-namespace:EstateView.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <default:DefaultDataGridStyle />
+        <default:DefaultPageStyles />
+        <default:DefaultOptionViewStyle />
+        <default:DefaultLabeledTextBlockStyle />
+        <default:DefaultZoomableContentControlStyle />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type view:OptionView}" BasedOn="{StaticResource DefaultOptionViewStyle}" />
+    <Style TargetType="{x:Type view:LabeledTextBlock}" BasedOn="{StaticResource DefaultLabeledTextBlockStyle}" />
+    <Style TargetType="{x:Type controls:ZoomableContentControl}" BasedOn="{StaticResource DefaultZoomableContentControlStyle}" />
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converter:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
+    <converter:DecimalToVisibilityConverter x:Key="DecimalToVisibilityConverter" />
+    <converter:SexToHisHerConverter x:Key="SexToHisHerConverter" />
+</ResourceDictionary>

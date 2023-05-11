@@ -1,0 +1,97 @@
+﻿<UserControl 
+    x:Class="EstateView.View.ProjectionsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:view="clr-namespace:EstateView.View" 
+    mc:Ignorable="d" 
+    d:DesignHeight="900"
+    d:DesignWidth="768">
+    <Grid Name="MainGrid" Style="{StaticResource PageGrid}">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Style>
+        </Grid.Resources>
+
+
+        <StackPanel Margin="10">
+            <TextBlock Text="{Binding CurrentScenario.Name}" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" />
+            <ContentControl Content="{Binding CurrentScenario.ScenarioOptions}" ContentTemplate="{StaticResource OptionsInHeaderTemplate}"/>
+                
+            <StackPanel Margin="10,10,10,0" HorizontalAlignment="Center">
+                <TextBlock Text="Projected Tax Liability" />
+                <DataGrid ItemsSource="{Binding CurrentScenario.FilteredProjections}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Year" Binding="{Binding Year}" />
+                        <DataGridTextColumn Header="Amount Passing&#13;Outside of&#13;Surviving&#13;Spouse's Estate" Binding="{Binding AmountPassingOutsideOfSurvivingSpousesEstate, StringFormat=\{0:C0\}}" />
+                        <DataGridTextColumn Header="Surviving&#13;Spouse's Gross&#13;Estate" Binding="{Binding SurvivingSpousesGrossEstate, StringFormat=\{0:C0\}}" />
+                        <DataGridTextColumn Header="-" />
+                        <DataGridTextColumn Header="Projected&#13;Exclusion&#13;Available" Binding="{Binding TotalExclusionAvailable, StringFormat=\{0:C0\}}" />
+                        <DataGridTextColumn Header="=" />
+                        <DataGridTextColumn Header="Taxable Value&#13;of Estate" Binding="{Binding TaxableValueOfEstate, StringFormat=\{0:C0\}}" />
+                        <DataGridTextColumn Binding="{Binding EstateTaxDue, StringFormat=\{0:C0\}}" Foreground="Red">
+                            <DataGridTextColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DataContext.CurrentScenario.Options.EstateTaxRate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, StringFormat=Estate Tax \{0:P0\}}" />
+                                </DataTemplate>
+                            </DataGridTextColumn.HeaderTemplate>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <StackPanel Margin="10,10,10,10" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding CurrentScenario.Options.InvestmentsGrowthRate, StringFormat=Projected Value of Estate Based on \{0:P\} Compound Rate of Return}" />
+                <DataGrid ItemsSource="{Binding CurrentScenario.FilteredProjections}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Year" Binding="{Binding Year}" />
+                        <DataGridTextColumn Header="Personal&#13;Residence&#13;and Property" Binding="{Binding ResidenceValue, StringFormat=\{0:C0\}}" />
+                        <DataGridTextColumn Header="+" />
+                        <DataGridTextColumn Header="Business&#13;and Investment&#13;Assets" Binding="{Binding InvestmentsValue, StringFormat=\{0:C0\}}"/>
+                        <DataGridTextColumn Header="+" />
+                        <DataGridTextColumn Header="Gifting&#13;Trust" Binding="{Binding GiftingTrustValue, StringFormat=\{0:C0\}}"/>
+                        <DataGridTextColumn Header="+" />
+                        <DataGridTextColumn Header="Bypass&#13;Trust" Binding="{Binding BypassTrustValue, StringFormat=\{0:C0\}}"/>
+                        <DataGridTextColumn Header="+" />
+                        <DataGridTextColumn Header="Installment&#13;Sale Trust" Binding="{Binding InstallmentSaleTrustValue, StringFormat=\{0:C0\}}"/>
+                        <DataGridTextColumn Header="=" />
+                        <DataGridTextColumn Header="Total&#13;Combined&#13;Assets" Binding="{Binding TotalCombinedAssets, StringFormat=\{0:C0\}}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <StackPanel Margin="10,10,10,10" HorizontalAlignment="Center">
+                <TextBlock Text="Projected Amount of Estate Tax Exclusion" />
+                <DataGrid ItemsSource="{Binding CurrentScenario.FilteredProjections}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Year" Binding="{Binding Year}" />
+                        <DataGridTextColumn Header="First&#13;Spouse's&#13;Exclusion" Binding="{Binding LifetimeGiftTaxExclusionAvailableSpouse1, StringFormat=\{0:C0\}}" />
+                        <DataGridTextColumn Header="+" />
+                        <DataGridTextColumn Header="Second&#13;Spouse's&#13;Exclusion" Binding="{Binding LifetimeGiftTaxExclusionAvailableSpouse2, StringFormat=\{0:C0\}}" />
+                        <DataGridTextColumn Header="-" />
+                        <DataGridTextColumn Header="Life Insurance&#13;Premiums over&#13;Gift Exclusion" Binding="{Binding LifeInsurancePremiumsOverGiftAmount, StringFormat=\{0:C0\}}" />
+                        <DataGridTextColumn Header="=" />
+                        <DataGridTextColumn Header="Total Exclusion&#13;Available" Binding="{Binding TotalExclusionAvailable, StringFormat=\{0:C0\}}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+            <StackPanel Margin="10,10,10,10" HorizontalAlignment="Center">
+                <TextBlock Text="Life Expectancy" />
+                <DataGrid ItemsSource="{Binding CurrentScenario.Options.Spouses}" Name="PersonDetails">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Sex" Binding="{Binding Sex}" />
+                        <DataGridCheckBoxColumn Header="Tobacco User?" Binding="{Binding IsSmoker}" />
+                        <DataGridTextColumn Header="Age" Binding="{Binding Age}" />
+                        <DataGridTextColumn Header="Life Expectancy" Binding="{Binding LifeExpectancy}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
+

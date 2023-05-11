@@ -1,0 +1,55 @@
+﻿<FlowDocument
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Paragraph>
+        <Bold>ILLUSTRATION 4 - DISCOUNTED GIFTING</Bold>
+        <LineBreak />
+        <LineBreak />
+        It is possible that valuation discounts can apply when certain ownership
+        interests are transferred.  Oftentimes a family will have a limited partnership,
+        a limited liability company with investments or a business held in it.  Part
+        ownership in this entity can be gifted, instead of cash.  When portion of
+        the business is gifted, it will receive a discount under the theory that a
+        buyer would not want to purchase an entity at full price if they cannot have
+        full ownership in it.  For example, a buyer would pay more per share for 75%
+        ownership, which would equal a majority interest, and would pay less per share
+        for 26% ownership, which is a minority interest.  The difference in value from
+        the majority interest per share and minority interest per share would be the discount. 
+        This amount is often speculated, but a 30% discount is regularly advised.
+        <LineBreak />
+        <LineBreak />
+        Ten percent of a company or limited partnership holding $1,000,000 worth of assets
+        may be worth significantly less than $100,000 when valuation discounts are taken into
+        consideration.  This will give the percentage transferred a lower value for estate tax purposes.
+        <LineBreak />
+        <LineBreak />
+        In this example, we are assuming that discounts of
+        <Run Text="{Binding DiscountPercentageForGifting, StringFormat=\{0:0%\}}" />
+        of value can apply. For example, if
+        <Run Text="{Binding Spouse1FirstName}" />
+        and
+        <Run Text="{Binding Spouse2FirstName}" />
+        were to place $1,000,000 worth of assets into a family limited liability company or
+        limited partnership and gift a 10% interest, then this would nominally transfer
+        $100,000 out of their estates but would only be valued at
+        <Run Text="{Binding OneHundredThousandDiscounted, StringFormat=C0}" />
+        for estate tax purposes.
+        <LineBreak />
+        <LineBreak />
+        The estate tax savings from the discount feature, based upon
+        <Run Text="{Binding TotalAnnualGiftsBeforeFirstDeath, StringFormat=C0}" />
+        a year of gifting while
+        <Run Text="{Binding Spouse1FirstName}" />
+        and
+        <Run Text="{Binding Spouse2FirstName}" />
+        are both alive, and then
+        <Run Text="{Binding TotalAnnualGiftsAfterFirstDeath, StringFormat=C0}" />
+        per year of gifting during
+        <Run Text="{Binding Spouse2FirstName}" />'s
+        remaining lifetime, is
+        <Run Text="{Binding EstateTaxSavingsFromDiscountedGifting, StringFormat=C0}" />.
+    </Paragraph>
+</FlowDocument>

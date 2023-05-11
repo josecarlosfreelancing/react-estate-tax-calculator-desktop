@@ -1,0 +1,55 @@
+﻿<FlowDocument
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Paragraph>
+        <Bold>ILLUSTRATION 1 - NO PLANNING</Bold>
+        <LineBreak />
+        <LineBreak />
+        This first illustration assumes no use of annual gifting, nor of life insurance trusts.
+        <LineBreak />
+        <LineBreak />
+        The first row shows
+        <Run Text="{Binding Spouse1FirstName}" /> and
+        <Run Text="{Binding Spouse2FirstName}" />’s assets in
+        <Run Text="{Binding CurrentYear}" />.
+        <LineBreak />
+        <LineBreak />
+        In the second row, we assume there has been a death of <Run Text="{Binding Spouse1FirstName}" />.  The chart reflects the increases of the assets.  At <Run Text="{Binding Spouse1FirstName}" />’s death, <Run Text="{Binding Spouse2FirstName}" /> received the life insurance.  This row shows all assets to the surviving spouse are thus subject to federal estate tax on the second death.
+        <LineBreak />
+        <LineBreak />
+        Many couples will allow this to occur, and use an estate tax portability allowance.
+        <LineBreak />
+        <LineBreak />
+        For purposes of this illustration, we are showing that the surviving spouse will therefore have a total exemption of
+        <Run Text="{Binding TotalExclusionAvailable, StringFormat=C0}" />
+        (<Run Text="{Binding DeceasedSpousesExclusionAvailable, StringFormat=C0}" />
+        from <Run Text="{Binding Spouse1FirstName}" />'s unused exemption +
+        <Run Text="{Binding SurvivingSpousesExclusionAvailable, StringFormat=C0}" />
+        from  <Run Text="{Binding Spouse2FirstName}" />'s unused exemption).
+        <LineBreak />
+        <LineBreak />
+        The third row illustrates <Run Text="{Binding Spouse2FirstName}" />’s estate at her death.
+        We show her dying
+        <Run Text="{Binding NumberOfYearsBetweenFirstAndSecondDeath}" /> years later
+        (<Run Text="{Binding NumberOfYearsBetweenNowAndSecondDeath}" /> years from now),
+        and having
+        <Run Text="{Binding SurvivingSpousesGrossEstate, StringFormat=C0}" />
+        worth of assets subject to federal estate tax.
+        Life insurance is also subject to federal estate tax on the second death.
+        <LineBreak />
+        <LineBreak />
+        The total estate taxable assets of <Run Text="{Binding Spouse2FirstName}" />
+        minus the allowance of <Run Text="{Binding Spouse1FirstName}" /> leaves
+        <Run Text="{Binding TaxableValueOfEstate, StringFormat=C0}" />
+        subject to federal estate tax. Assuming a
+        <Run Text="{Binding EstateTaxRate, StringFormat=\{0:0%\}}" />
+        estate tax rate, the estate tax would be
+        <Run Text="{Binding EstateTaxDue, StringFormat=C0}" />,
+        and is normally owed 9 months after the surviving spouse's date of death,
+        although payment plans can currently be obtained for large closely held
+        businesses or actively managed real estate situations.
+    </Paragraph>
+</FlowDocument>

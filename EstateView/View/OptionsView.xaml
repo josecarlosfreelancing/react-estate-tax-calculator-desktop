@@ -1,0 +1,40 @@
+﻿<UserControl 
+    x:Class="EstateView.View.OptionsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:wpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:viewModel="clr-namespace:EstateView.ViewModel"
+    mc:Ignorable="d">
+    <wpfToolkit:PropertyGrid
+        NameColumnWidth="250"
+        SelectedObject="{Binding Options}"
+        AutoGenerateProperties="True"
+        ShowSearchBox="False"
+        ShowSortOptions="False"
+        ShowTitle="False">
+        <wpfToolkit:PropertyGrid.EditorDefinitions>
+            <wpfToolkit:EditorTemplateDefinition>
+                <wpfToolkit:EditorTemplateDefinition.TargetProperties>
+                    <wpfToolkit:TargetPropertyType Type="{x:Type viewModel:PersonViewModel}" />
+                </wpfToolkit:EditorTemplateDefinition.TargetProperties>
+                <wpfToolkit:EditorTemplateDefinition.EditingTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Value.DisplayValue}" Foreground="Gray" Margin="5,0,0,0" />
+                    </DataTemplate>
+                </wpfToolkit:EditorTemplateDefinition.EditingTemplate>
+            </wpfToolkit:EditorTemplateDefinition>
+            <wpfToolkit:EditorTemplateDefinition>
+                <wpfToolkit:EditorTemplateDefinition.TargetProperties>
+                    <wpfToolkit:TargetPropertyType Type="{x:Type viewModel:LifeInsuranceOptionsViewModel}" />
+                </wpfToolkit:EditorTemplateDefinition.TargetProperties>
+                <wpfToolkit:EditorTemplateDefinition.EditingTemplate>
+                    <DataTemplate>
+                        <TextBlock />
+                    </DataTemplate>
+                </wpfToolkit:EditorTemplateDefinition.EditingTemplate>
+            </wpfToolkit:EditorTemplateDefinition>
+        </wpfToolkit:PropertyGrid.EditorDefinitions>
+    </wpfToolkit:PropertyGrid>
+</UserControl>

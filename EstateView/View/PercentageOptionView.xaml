@@ -1,0 +1,25 @@
+﻿<view:OptionView 
+    x:Class="EstateView.View.PercentageOptionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:view="clr-namespace:EstateView.View"
+    xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+    mc:Ignorable="d" 
+    d:DesignHeight="30" 
+    d:DesignWidth="300"
+    x:Name="this">
+
+    <toolkit:DecimalUpDown 
+        Height="24"
+        Margin="3"
+        Padding="2"
+        AutoSelectBehavior="OnFocus"
+        FormatString="P2" 
+        Value="{Binding ElementName=this, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        Minimum="{Binding ElementName=this, Path=Minimum}" 
+        Increment="{Binding ElementName=this, Path=Increment}" 
+        Maximum="{Binding ElementName=this, Path=Maximum}" />
+
+</view:OptionView>

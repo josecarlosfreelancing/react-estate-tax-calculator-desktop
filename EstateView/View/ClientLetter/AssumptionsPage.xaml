@@ -1,0 +1,697 @@
+﻿<FlowDocument
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="clr-namespace:EstateView.Converter;assembly=EstateView"
+    mc:Ignorable="d">
+    <FlowDocument.Resources>
+        <Style TargetType="{x:Type Table}">
+            <Setter Property="CellSpacing" Value="5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+        <Style TargetType="{x:Type Paragraph}">
+            <Setter Property="Margin" Value="4"/>
+        </Style>
+        <Style x:Key="TableCellStyle" TargetType="{x:Type TableCell}">
+        </Style>
+        <Style x:Key="HeaderStyle" TargetType="{x:Type TableCell}" BasedOn="{StaticResource TableCellStyle}">
+            <Setter Property="Background" Value="SkyBlue"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <converter:BooleanToStringConverter x:Key="BooleanToYesNoStringConverter" TrueValue="Yes" FalseValue="No"/>
+        <converter:BooleanToStringConverter x:Key="NegatedBooleanToYesNoStringConverter" TrueValue="No" FalseValue="Yes"/>
+        <converter:DecimalToStringConverter x:Key="NetYearlySavingsConverter" NegativeStringFormat="{}{0:C0} per year net outflow" PositiveStringFormat="{}{0:C0} per year excess savings" />
+    </FlowDocument.Resources>
+
+    <Paragraph>
+        <Bold>ASSUMPTIONS</Bold>
+    </Paragraph>
+
+    <!-- Clients -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="225"/>
+            <TableColumn Width="225"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="3">
+                    <Paragraph>
+                        <Bold>Clients</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Name</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.Name, Mode=OneWay}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.Name, Mode=OneWay}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Age</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.Age}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.Age}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Sex</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.Sex}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.Sex}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Tobacco User?</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.IsSmoker, Converter={StaticResource BooleanToYesNoStringConverter}}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.IsSmoker, Converter={StaticResource BooleanToYesNoStringConverter}}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Lifetime Gift Exclusion Used</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.LifetimeGiftExclusionAmountUsed, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.LifetimeGiftExclusionAmountUsed, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Projected Year of Death</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.ProjectedYearOfDeath}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.ProjectedYearOfDeath}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+
+    <!-- Personal Residence -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="450"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="2">
+                    <Paragraph>
+                        <Bold>Personal Residence and Property</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Current Value</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.HomeValue, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Annual Growth Rate</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.HomeValueGrowthRate, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+
+    <!-- Business and Investments -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="450"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="2">
+                    <Paragraph>
+                        <Bold>Business and Investments</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Current Value</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.AmountCurrentlyInvested, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Annual Growth Rate</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InvestmentsGrowthRate, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Annual Fees &amp; Tax Reduction Rate</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InvestmentFeesRate, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Net Yearly Savings/Outgo (while both alive)</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.AnnualInvestmentsChangeBeforeFirstDeath, Converter={StaticResource NetYearlySavingsConverter}}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Net Yearly Savings/Outgo (after first death)</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.AnnualInvestmentsChangeAfterFirstDeath, Converter={StaticResource NetYearlySavingsConverter}}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+
+    <!--2026 Exemption Adjustment -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="450"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="2">
+                    <Paragraph>
+                        <Bold>2026 Exemption Adjustment</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Exemption drops in 2026?</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.AssumeExemptionReductionIn2026, Converter={StaticResource BooleanToYesNoStringConverter}}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+
+    <!-- Portability -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="450"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="2">
+                    <Paragraph>
+                        <Bold>Portability</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Assume portability?</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.AssumeNoPortability, Converter={StaticResource NegatedBooleanToYesNoStringConverter}}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+
+    <!-- Bypass Trust -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="450"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="2">
+                    <Paragraph>
+                        <Bold>Bypass Trust</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Bypass Trust Value</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.BypassTrustValue, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+
+    <!-- Gifting -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="450"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="2">
+                    <Paragraph>
+                        <Bold>Gifting</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Discount Percentage for Gifting</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.DiscountPercentageForGifting, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Initial Gifting Trust Value</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InitialGiftingTrustValue, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Number of $14k Gifts per year</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.NumberOfAnnualGiftsPerYear}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Percentage of Gifts to Gifting Trust</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.PercentageOfAvailableGiftToPermissibleGift, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Percentage of Gifts using Discounting</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.PercentageOfInvestedGiftAmountDiscounted, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+
+    <!-- Life Insurance -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="150"/>
+            <TableColumn Width="150"/>
+            <TableColumn Width="150"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="4">
+                    <Paragraph>
+                        <Bold>Life Insurance</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>
+                        <Bold>Insured</Bold>
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.Name, Mode=OneWay}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.Name, Mode=OneWay}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        Second To Die
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Held in ILIT?</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.LifeInsurance.IsInTrust, Converter={StaticResource BooleanToYesNoStringConverter}}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.LifeInsurance.IsInTrust, Converter={StaticResource BooleanToYesNoStringConverter}}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.SecondToDieLifeInsurance.IsInTrust, Converter={StaticResource BooleanToYesNoStringConverter}}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Policy Type</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.LifeInsurance.PolicyType}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.LifeInsurance.PolicyType}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.SecondToDieLifeInsurance.PolicyType}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Annual Premium</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.LifeInsurance.AnnualPremium, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.LifeInsurance.AnnualPremium, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.SecondToDieLifeInsurance.AnnualPremium, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Number of Years</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.LifeInsurance.NumberOfYears}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.LifeInsurance.NumberOfYears}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.SecondToDieLifeInsurance.NumberOfYears}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Death Benefit</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse1.LifeInsurance.DeathBenefit, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.Spouse2.LifeInsurance.DeathBenefit, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.SecondToDieLifeInsurance.DeathBenefit, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+
+    <!-- Installment Sale -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="450"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="2">
+                    <Paragraph>
+                        <Bold>Installment Sale</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Seed Capital Amount</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InstallmentSaleSeedMoneyAmount, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Sale Value before Discount</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InstallmentSaleValueBeforeDiscount, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Discount Rate</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InstallmentSaleNoteDiscountRate, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Sale Value after Discount</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InstallmentSaleValueAfterDiscount, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Note Amount</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InstallmentSaleNoteAmount, StringFormat=C0}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Note Interest Rate</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InstallmentSaleNoteInterestRate, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Type of Note</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InstallmentSaleNoteType}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Note Term in Years</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.InstallmentSaleNoteTermInYears}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Year to Toggle Off Grantor Status</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding InstallmentSaleYearToToggleOffGrantorTrustStatusText, Mode=OneWay}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+    
+    <!-- Misc -->
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="450"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}" ColumnSpan="2">
+                    <Paragraph>
+                        <Bold>Misc</Bold>
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Consumer Price Index Growth Rate</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.ConsumerPriceIndexGrowthRate, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Estate Tax Rate</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.EstateTaxRate, StringFormat=P2}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell Style="{StaticResource HeaderStyle}">
+                    <Paragraph>Use Constant Dollars</Paragraph>
+                </TableCell>
+                <TableCell>
+                    <Paragraph>
+                        <Run Text="{Binding Options.UseConstantDollars, Converter={StaticResource BooleanToYesNoStringConverter}}" />
+                    </Paragraph>
+                </TableCell>
+            </TableRow>
+        </TableRowGroup>
+    </Table>
+</FlowDocument>

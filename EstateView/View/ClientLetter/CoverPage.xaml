@@ -1,0 +1,84 @@
+﻿<FlowDocument
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d">
+
+    <Paragraph TextAlignment="Center" FontWeight="Bold" FontSize="36">
+        ESTATEVIEW
+    </Paragraph>
+
+    <Paragraph TextAlignment="Center" FontWeight="Bold" FontSize="24">
+        A MULTI-DIMENSIONAL FEDERAL ESTATE TAX PLANNING SYSTEM
+        WITH CLIENT PROJECTIONS, ILLUSTRATIONS, AND EXPLANATIONS
+    </Paragraph>
+
+    <Paragraph TextAlignment="Center" FontWeight="Bold">
+        <LineBreak />
+        <LineBreak />
+        <LineBreak />
+        <LineBreak />
+        PRESENTED BY
+        <LineBreak />
+        <Run Text="{Binding PlannerName}" />
+        <LineBreak />
+        <Run Text="{Binding PlannerFirmName}" />
+        <LineBreak />
+        <LineBreak />
+        <LineBreak />
+        <LineBreak />
+        TABLE OF CONTENTS
+        <LineBreak />
+        FOR CLIENT ILLUSTRATION
+        <LineBreak />
+        MEMORANDUM DRAFTING SYSTEM
+        <LineBreak />
+    </Paragraph>
+
+    <List>
+        <ListItem>
+            <Paragraph>INTRODUCTION TO THE FEDERAL ESTATE TAX SYSTEM</Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph>ASSUMPTIONS</Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph><Run FontStyle="Italic">ILLUSTRATION 1</Run> - NO PLANNING</Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph><Run FontStyle="Italic">ILLUSTRATION 2</Run> - USE OF A BYPASS TRUST</Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph><Run FontStyle="Italic">ILLUSTRATION 3</Run> - USE OF ANNUAL GIFTING</Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph><Run FontStyle="Italic">ILLUSTRATION 4</Run> - USE OF DISCOUNTED GIFTING</Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph><Run FontStyle="Italic">ILLUSTRATION 5</Run> - USE OF LIFE INSURANCE</Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph><Run FontStyle="Italic">ILLUSTRATION 6</Run> - USE OF INSTALLMENT SALE</Paragraph>
+        </ListItem>
+    </List>
+
+    <Paragraph>
+        <LineBreak />
+        <LineBreak />
+        <LineBreak />
+        Prepared for Review by
+        <Run Text="{Binding Spouse1FirstName}" /> and
+        <Run Text="{Binding Spouse2FirstName}" />
+        <Run Text="{Binding Spouse1LastName}" />.
+        <LineBreak />
+        <LineBreak />
+        NOTE: This explanation and attached projections are in rough draft form, and have not
+        been tailored to the individual situation of the clients. They are provided for
+        illustration purposes only, and do not constitute a complete or necessarily accurate
+        depiction of the present or expected future situation. We nevertheless believe this
+        explanation and the attached explanatory charts are useful to facilitate an understanding
+        of the estate tax system and how it can affect
+        <Run Text="{Binding Spouse1FirstName}" /> and
+        <Run Text="{Binding Spouse2FirstName}" />'s family.
+    </Paragraph>
+</FlowDocument>

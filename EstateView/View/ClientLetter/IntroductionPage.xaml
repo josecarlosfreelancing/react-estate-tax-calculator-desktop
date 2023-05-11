@@ -1,0 +1,105 @@
+﻿<FlowDocument
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="clr-namespace:EstateView.Converter;assembly=EstateView"
+    mc:Ignorable="d">
+    <FlowDocument.Resources>
+        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+        <converter:BooleanToVisibilityConverter x:Key="NegatedBooleanToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible"/>
+    </FlowDocument.Resources>
+    <Paragraph>
+        <Bold>INTRODUCTION TO THE FEDERAL ESTATE TAX SYSTEM</Bold>
+        <LineBreak/>
+        <LineBreak/>
+        When a person dies, the federal estate and gift tax systems add up the value of the person’s
+        assets, allowing deductions for assets that pass to charity, to a spouse, or to special
+        trusts for charities and spouses.  The amount that can pass estate tax free is called
+        the estate tax exemption.  Each person is entitled to his or her own estate tax exemption.
+        If the value of an estate minus allowable deductions is less than the estate tax exemption, 
+        no estate tax is due.
+        <LineBreak/>
+        <LineBreak/>
+        <Underline>Marital Deduction</Underline>
+        <LineBreak/>
+        The law provides an unlimited marital deduction so that spouses can transfer assets to each
+        other, either directly or under a Marital Deduction Trust, without incurring estate or gift
+        tax.  Therefore, if the first spouse gives all of his or her assets to his surviving spouse
+        or to a Marital Deduction Trust, his estate will not pay any estate or gift tax.
+        <LineBreak/>
+        <LineBreak/>
+        <Underline>Federal Estate Tax Allowance</Underline>
+        <LineBreak/>
+        Another planning tool is to use the federal estate tax allowance that is increased
+        annually in proportion to increases in the Consumer Price Index.  The present allowance
+        is
+        <Run Text="{Binding LifetimeGiftExclusionAmount, StringFormat=C0}" /> ,
+        and is allowed to be combined for a couple.  This allows the surviving spouse
+        to use both their personal
+        <Run Text="{Binding LifetimeGiftExclusionAmount, StringFormat=C0}" />
+        (minus prior taxable gifting) allowance, plus CPI
+        increases to such allowance, plus whatever remaining estate tax exemption that was not
+        used on the first spouse's death.  Any unused allowance at the death of the first spouse
+        will be available to the second spouse through something called the portability allowance.
+        <LineBreak/>
+        <LineBreak/>
+        The portability allowance allows the surviving spouse to use any leftover portion of the
+        deceased spouse’s estate tax allowance.  So if A only used $1,000,000 of the
+        <Run Text="{Binding LifetimeGiftExclusionAmount, StringFormat=C0}" />
+        allowed, B would be able to use the leftover
+        <Run Text="{Binding LifetimeGiftExclusionAmountMinusOneMillion, StringFormat=C0}" />
+        which combined with B’s
+        <Run Text="{Binding LifetimeGiftExclusionAmount, StringFormat=C0}" />
+        allowance, would allow B to shelter
+        <Run Text="{Binding LifetimeGiftExclusionAmountDoubledMinusOneMillion, StringFormat=C0}" />
+        on B’s death. The portability allowance does not increase with inflation, and is a lifetime amount.
+        Therefore if an individual makes gifts over the annual amount allowed (presently
+        <Run Text="{Binding AnnualGiftExclusionAmount, StringFormat=C0}" />
+        per beneficiary),
+        those gifts would be subtracted from the lifetime
+        <Run Text="{Binding LifetimeGiftExclusionAmount, StringFormat=C0}" />
+        allowance.
+        <LineBreak/>
+        <LineBreak/>
+        The portability allowance may be lost or reduced in the event of a second marriage,
+        where the surviving spouse remarries to someone with a smaller or no estate tax
+        exemption, and the new spouse is the first to die.
+        <LineBreak/>
+        <LineBreak/>
+        <Underline>Annual Gifting</Underline>
+        <LineBreak/>
+        An individual is permitted to give another person an annual amount without incurring
+        gift tax.  This amount changes with inflation, and is presently set at
+        <Run Text="{Binding AnnualGiftExclusionAmount, StringFormat=C0}" />
+        for an individual (for
+        <Run Text="{Binding CurrentYear}" />). 
+        This amount can be combined with a spouse’s amount to allow a couple to give a gift
+        in the amount of
+        <Run Text="{Binding AnnualGiftExclusionAmountDoubled, StringFormat=C0}" /> .  
+        The individual or couple are allowed to gift to as many people as they want within the
+        year, but they can only gift the maximum amount to each individual once a year.  Also, gifts
+        between spouses, no matter the amount, are always tax free.
+        <LineBreak/>
+        <LineBreak/>
+        Annual gifting can combined with different estate planning techniques to maximize the amount
+        of gifts to an individual, often to a child or grandchild.  Any gifts made under the annual
+        gifting exclusion will not affect the estate annual allowance.  Any gifts over the annual 
+        gifting amount will require the filing of a gift tax return, and will be subtracted from
+        what is called the gift tax exemption amount.  This is set at
+        <Run Text="{Binding LifetimeGiftExclusionAmount, StringFormat=C0}" />.  
+        Upon death, the balance of this amount becomes the individual’s federal estate tax allowance.
+        <LineBreak/>
+        <LineBreak/>
+        There are several ways to make use of the first dying spouse's (and growing) allowance to
+        shield assets from federal estate tax on the surviving spouse's death.  The following
+        illustrations will show how proper estate planning techniques work, and how they can
+        work individually or together for your estate plan.
+        <LineBreak/>
+        <LineBreak/>
+        <Run Text="{Binding AssumeExemptionReductionIn2026Text}" />
+        <LineBreak/>
+        <LineBreak/>
+        <Run Text="{Binding AssumeNoPortabilityText}" />
+    </Paragraph>
+</FlowDocument>

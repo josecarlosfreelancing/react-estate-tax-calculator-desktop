@@ -1,0 +1,437 @@
+﻿<UserControl
+    x:Class="EstateView.View.BoxesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converter="clr-namespace:EstateView.Converter"
+    xmlns:logistics="clr-namespace:EstateView.ViewModel.Logistics"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=logistics:BoxesDesignerViewModel, IsDesignTimeCreatable=True}">
+    
+    <UserControl.Resources>
+        <converter:NullConverter x:Key="NullCollapsedConverter" ValueIfNull="Collapsed" ValueIfNotNull="Visible"/>
+        
+        <Style x:Key="Arrow" TargetType="Path">
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Fill" Value="Yellow"/>
+        </Style>
+        
+        <Style x:Key="ArrowToBottomPath" TargetType="Path" BasedOn="{StaticResource Arrow}">
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="Data" Value="M10,0 L20,0 L20,40 L30,40 L15,55 L0,40 L10,40 Z"/>
+        </Style>
+
+        <Style x:Key="ArrowToBottomRightPath" TargetType="Path" BasedOn="{StaticResource ArrowToBottomPath}">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="-45" CenterX="20" CenterY="20" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="AmountStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style x:Key="TitleStyle" TargetType="Border">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="DodgerBlue"/>
+        </Style>
+        
+        <Style x:Key="TitleTextStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style x:Key="LightBorder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="2"/>
+        </Style>
+
+        <DataTemplate x:Key="CoupleEstateNotFinalDataTemplate" DataType="logistics:EstateBoxViewModel">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Border Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleStyle}">
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextStyle}" />
+                </Border>
+                
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Residence" />
+                        <TextBlock Text="{Binding Residence, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Annual Growth Rate" />
+                        <TextBlock Text="{Binding ResidenceAnnualGrowthRate, StringFormat=P2}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Investments" />
+                        <TextBlock Text="{Binding Investments, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Annual Additions" />
+                        <TextBlock Text="{Binding InvestmentsAnnualChange, StringFormat=C0}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Annual Growth Rate" />
+                        <TextBlock>
+                            <Run Text="{Binding InvestmentsAnnualGrowthRate, StringFormat=P2}"/>
+                            <Run Text="less"/>
+                            <Run Text="{Binding InvestmentsAnnualFeesRate, StringFormat=P2}"/>
+                            <Run Text="fees"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Path Grid.Row="3" Grid.ColumnSpan="3" Style="{StaticResource ArrowToBottomPath}" HorizontalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="CoupleEstateFinalDataTemplate" DataType="logistics:EstateBoxViewModel">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleStyle}">
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextStyle}"/>
+                </Border>
+                
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Residence" />
+                        <TextBlock Text="{Binding Residence, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Investments" />
+                        <TextBlock Text="{Binding Investments, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Exclusion/Portability" />
+                        <TextBlock Text="{Binding Portability, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource LightBorder}">
+                    <TextBlock Margin="4" HorizontalAlignment="Center" FontWeight="Bold" Text="{Binding NetTaxableEstate, StringFormat='Net Taxable Estate: {0:C0}'}"/>
+                </Border>
+                <Path Grid.Row="3" Grid.ColumnSpan="3" Style="{StaticResource ArrowToBottomPath}" HorizontalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BypassTrustDataTemplate" DataType="logistics:BypassTrustViewModel">
+            <Grid Visibility="{Binding Converter={StaticResource NullCollapsedConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Style="{StaticResource TitleStyle}">
+                    <TextBlock Text="Bypass Trust" Style="{StaticResource TitleTextStyle}"/>
+                </Border>
+
+                <Border Grid.Row="1" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Initial Funding Upon 1st Death" />
+                        <TextBlock Text="{Binding Value, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Annual Growth Rate" />
+                        <TextBlock>
+                            <Run Text="{Binding AnnualGrowthRate, StringFormat=P2}"/>
+                            <Run Text="less"/>
+                            <Run Text="{Binding AnnualFeesRate, StringFormat=P2}"/>
+                            <Run Text="fees"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Path Grid.Row="3" Style="{StaticResource ArrowToBottomPath}" HorizontalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+
+        <ItemsPanelTemplate x:Key="HorizontalItemsPanel">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+
+        <DataTemplate x:Key="GiftingTrustDataTemplate" DataType="logistics:GiftingTrustViewModel">
+            <Grid Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Style="{StaticResource TitleStyle}">
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextStyle}"/>
+                </Border>
+
+                <Border Grid.Row="1" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Value" />
+                        <TextBlock Text="{Binding Value, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Annual Gifts" />
+                        <TextBlock Text="{Binding AnnualGifts, StringFormat=C0}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="3" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Annual Growth Rate" />
+                        <TextBlock>
+                            <Run Text="{Binding AnnualGrowthRate, StringFormat=P2}"/>
+                            <Run Text="less"/>
+                            <Run Text="{Binding AnnualFeesRate, StringFormat=P2}"/>
+                            <Run Text="fees"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Path Grid.Row="4" Style="{StaticResource ArrowToBottomPath}" HorizontalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="InstallmentSaleTrustDataTemplate" DataType="logistics:InstallmentSaleTrustViewModel">
+            <Grid Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Style="{StaticResource TitleStyle}">
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextStyle}"/>
+                </Border>
+
+                <Border Grid.Row="1" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Gross Value" />
+                        <TextBlock Text="{Binding GrossValue, StringFormat=C0}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Less Note" />
+                        <TextBlock Text="{Binding NoteValue, StringFormat=C0}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="3" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Net Value" />
+                        <TextBlock Text="{Binding Value, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Path Grid.Row="4" Style="{StaticResource ArrowToBottomPath}" HorizontalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="IlitDataTemplate" DataType="logistics:LifeInsuranceViewModel">
+            <Grid Margin="4" Width="150">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border x:Name="Title" Grid.Row="0" Style="{StaticResource TitleStyle}">
+                    <TextBlock x:Name="TitleText" Text="{Binding Title}" Style="{StaticResource TitleTextStyle}"/>
+                </Border>
+                
+                <Border Grid.Row="1" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Death Benefit" />
+                        <TextBlock Text="{Binding Value, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource LightBorder}" x:Name="deadAnnualContainer" Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock Text="Annual Growth Rate" />
+                        <TextBlock>
+                            <Run Text="{Binding AnnualGrowthRate, StringFormat=P2}"/>
+                            <Run Text="less"/>
+                            <Run Text="{Binding AnnualFeesRate, StringFormat=P2}"/>
+                            <Run Text="fees"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource LightBorder}" x:Name="aliveAnnualContainer">
+                    <StackPanel>
+                        <TextBlock Text="Annual Premium" />
+                        <TextBlock Text="{Binding AnnualPremium, StringFormat=C0}"/>
+                    </StackPanel>
+                </Border>
+                <Path Grid.Row="3" Style="{StaticResource ArrowToBottomPath}" HorizontalAlignment="Center"/>
+            </Grid>
+            
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding AnnualPremium}" Value="0">
+                    <Setter TargetName="aliveAnnualContainer" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="deadAnnualContainer" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsInTrust}" Value="False">
+                    <Setter TargetName="Title" Property="Background" Value="Yellow"/>
+                    <Setter TargetName="TitleText" Property="Foreground" Value="Black"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ValueBoxDataTemplate">
+            <Grid Margin="4" Width="150">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Border x:Name="Title" Grid.Row="0" Style="{StaticResource TitleStyle}">
+                    <TextBlock x:Name="TitleText" Text="{Binding Title}" Style="{StaticResource TitleTextStyle}"/>
+                </Border>
+                
+                <Border Grid.Row="1" Style="{StaticResource LightBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Value" />
+                        <TextBlock Text="{Binding Value, StringFormat=C0}" Style="{StaticResource AmountStyle}"/>
+                    </StackPanel>
+                </Border>
+                
+                <Path Grid.Row="2" Style="{StaticResource ArrowToBottomPath}" HorizontalAlignment="Center"/>
+            </Grid>
+            
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding AnnualPremium}" Value="0">
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsInTrust}" Value="False">
+                    <Setter TargetName="Title" Property="Background" Value="Yellow"/>
+                    <Setter TargetName="TitleText" Property="Foreground" Value="Black"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Name="MainGrid" Style="{StaticResource PageGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="10">
+            <TextBlock Text="{Binding CurrentScenario.Name}" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Today}, StringFormat='{}(All values are in constant {0:yyyy} dollars)'}" Visibility="{Binding CurrentScenario.Options.UseConstantDollars, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap" />
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Today" VerticalAlignment="Top" Margin="4"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Margin="4">
+                <Run Text="Upon 1st Death&#x0a;(in Year"/>
+                <Run Text="{Binding FirstDeath.DeltaYear}"/>
+                <Run Text=")"/>
+            </TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Margin="4">
+                <Run Text="Upon 2nd Death&#x0a;(in Year"/>
+                <Run Text="{Binding SecondDeath.DeltaYear}"/>
+                <Run Text=")"/>
+            </TextBlock>
+
+            <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="4" Content="{Binding Today.Estate}" ContentTemplate="{StaticResource CoupleEstateNotFinalDataTemplate}"/>
+            <ContentControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="4" Content="{Binding FirstDeath.Estate}" ContentTemplate="{StaticResource CoupleEstateNotFinalDataTemplate}"/>
+            <ContentControl Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="4" Content="{Binding SecondDeath.Estate}" ContentTemplate="{StaticResource CoupleEstateFinalDataTemplate}"/>
+
+            <Ellipse Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="Red" Width="120" Height="120" HorizontalAlignment="Center" Margin="4"/>
+            <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Estate Tax" TextAlignment="Center"/>
+                <TextBlock Text="{Binding SecondDeath.Estate.EstateTax, StringFormat=C0}" Style="{StaticResource AmountStyle}" FontWeight="Bold" Margin="4" TextAlignment="Center"/>
+            </StackPanel>
+
+            <Path Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource ArrowToBottomRightPath}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="{Binding FirstDeath.BypassTrust, Converter={StaticResource NullCollapsedConverter}}" />
+            <ContentControl Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Margin="4" Content="{Binding FirstDeath.BypassTrust}" ContentTemplate="{StaticResource BypassTrustDataTemplate}" Visibility="{Binding SecondDeath.BypassTrust, Converter={StaticResource NullCollapsedConverter}}" />
+            <ContentControl Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Margin="4" Content="{Binding SecondDeath.BypassTrust}" ContentTemplate="{StaticResource ValueBoxDataTemplate}" Visibility="{Binding SecondDeath.BypassTrust, Converter={StaticResource NullCollapsedConverter}}" />
+
+            <ItemsControl Grid.Row="0" Grid.Column="6" BorderThickness="0" ItemsSource="{Binding Today.GiftingTrusts}" ItemTemplate="{StaticResource GiftingTrustDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+            <ItemsControl Grid.Row="1" Grid.Column="6" BorderThickness="0" ItemsSource="{Binding FirstDeath.GiftingTrusts}" ItemTemplate="{StaticResource GiftingTrustDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+            <ItemsControl Grid.Row="2" Grid.Column="6" BorderThickness="0" ItemsSource="{Binding SecondDeath.GiftingTrusts}" ItemTemplate="{StaticResource ValueBoxDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+
+            <ItemsControl Grid.Row="0" Grid.Column="7" BorderThickness="0" ItemsSource="{Binding Today.InstallmentSaleTrusts}" ItemTemplate="{StaticResource InstallmentSaleTrustDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+            <ItemsControl Grid.Row="1" Grid.Column="7" BorderThickness="0" ItemsSource="{Binding FirstDeath.InstallmentSaleTrusts}" ItemTemplate="{StaticResource InstallmentSaleTrustDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+            <ItemsControl Grid.Row="2" Grid.Column="7" BorderThickness="0" ItemsSource="{Binding SecondDeath.InstallmentSaleTrusts}" ItemTemplate="{StaticResource InstallmentSaleTrustDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+
+            <ItemsControl Grid.Row="0" Grid.Column="8" BorderThickness="0" ItemsSource="{Binding Today.Ilits}" ItemTemplate="{StaticResource IlitDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+            <ItemsControl Grid.Row="1" Grid.Column="8" BorderThickness="0" ItemsSource="{Binding FirstDeath.Ilits}" ItemTemplate="{StaticResource IlitDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+            <ItemsControl Grid.Row="2" Grid.Column="8" BorderThickness="0" ItemsSource="{Binding SecondDeath.Ilits}" ItemTemplate="{StaticResource ValueBoxDataTemplate}" ItemsPanel="{StaticResource HorizontalItemsPanel}"/>
+            <Border Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="5">
+                <Grid>
+                    <Rectangle Grid.Column="1" Fill="LightGreen" Stroke="Black" StrokeThickness="2" HorizontalAlignment="Stretch" RadiusX="35" RadiusY="35" />
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Total Passed&#x0a;to Beneficiaries" TextAlignment="Center"/>
+                        <TextBlock Text="{Binding TotalPassedToBeneficiaries, StringFormat=C0}" Style="{StaticResource AmountStyle}" Margin="4" FontWeight="Bold" TextAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

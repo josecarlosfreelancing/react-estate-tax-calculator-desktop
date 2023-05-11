@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="EstateView.Images.ResultsSnapshot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EstateView.Images"
+             mc:Ignorable="d" 
+             d:DesignHeight="20" d:DesignWidth="20">
+    <Viewbox Width="20" Height="20">
+        <Canvas Width="20" Height="20">
+            <Path xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"x:Name="path"  Width="20"  Height="20" Data="M3 21H11V13H3M5 15H9V19H5M3 11H11V3H3M5 5H9V9H5M13 3V11H21V3M19 9H15V5H19M18 16H21V18H18V21H16V18H13V16H16V13H18Z" Fill="DarkMagenta" Stretch="Uniform" />
+        </Canvas>
+    </Viewbox>
+
+</UserControl>

@@ -1,0 +1,43 @@
+﻿<FlowDocument
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Paragraph>
+        <Bold>ILLUSTRATION 3 - ANNUAL GIFTING</Bold>
+        <LineBreak />
+        <LineBreak />
+        In addition to the use of the Bypass Trust described above, we show the use of annual gifting.
+        <LineBreak />
+        <LineBreak />
+        An individual can gift up to
+        <Run Text="{Binding AnnualGiftExclusionAmount, StringFormat=C0}" />
+        a year, or
+        <Run Text="{Binding AnnualGiftExclusionAmountDoubled, StringFormat=C0}" />
+        per a married couple,
+        to any individual without reporting a gift.  There is no limit on the number
+        of people someone can gift to in a year.  There is only the limit of
+        <Run Text="{Binding AnnualGiftExclusionAmount, StringFormat=C0}" />
+        per person.
+        <LineBreak />
+        <LineBreak />
+        In this example, the gifting is based upon
+        <Run Text="{Binding Spouse1FirstName}" />
+        and
+        <Run Text="{Binding Spouse2FirstName}" /> transferring
+        <Run Text="{Binding AnnualGiftExclusionAmount, StringFormat=C0}" />
+        per child, or grandchild, per year.
+        This amount includes our projections of the increases in annual gifting
+        that will be in accordance with increases in the CPI.  Annual gifting is
+        also evaluated on an annual basis, and increases are in increments of $1,000.
+        <LineBreak />
+        <LineBreak />
+        The combined savings from the annual gifting for both
+        <Run Text="{Binding Spouse1FirstName}" />
+        and
+        <Run Text="{Binding Spouse2FirstName}" />
+        is
+        <Run Text="{Binding EstateTaxSavingsFromAnnualGifting, StringFormat=C0}" />.
+    </Paragraph>
+</FlowDocument>

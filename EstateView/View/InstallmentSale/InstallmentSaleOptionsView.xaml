@@ -1,0 +1,59 @@
+﻿<UserControl
+    x:Class="EstateView.View.InstallmentSale.InstallmentSaleOptionsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:view="clr-namespace:EstateView.View" xmlns:images="clr-namespace:EstateView.Images"
+    mc:Ignorable="d" 
+    d:DesignHeight="355"
+    d:DesignWidth="800">
+    <Grid Background="LightGray">
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <StackPanel>
+                    <view:CurrencyOptionView LabelText="Initial Assets" Value="{Binding Options.PersonalAssetsAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="500000" />
+                    <view:CurrencyOptionView LabelText="Annual Saving/Spending" Value="{Binding Options.EstateSpendingSavingAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Increment="50000" />
+                    <view:PercentageOptionView LabelText="Asset Growth Rate" Value="{Binding Options.AssetGrowthRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="0.01" />
+                    <view:PercentageOptionView LabelText="Income Tax (as a percentage of Assets)" Value="{Binding Options.IncomeTaxRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="0.01" />
+                    <view:CurrencyOptionView LabelText="Lifetime Exclusion Already Used" Value="{Binding Options.LifetimeExclusionUsed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="250000" />
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <StackPanel>
+                    <view:CurrencyOptionView LabelText="Seed Capital Amount" Value="{Binding Options.SeedCapitalAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="100000" />
+                    <view:CurrencyOptionView LabelText="Sale Value before Discount" Value="{Binding Options.AssetValueBeforeDiscount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="100000" />
+                    <view:PercentageOptionView LabelText="Discount Rate" Value="{Binding Options.DiscountRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="0.05" />
+                    <view:CurrencyOptionView LabelText="Sale Value after Discount" Value="{Binding Options.AssetValueAfterDiscount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="100000" />
+                    <view:CurrencyOptionView LabelText="Note Amount (Equal to Sale Value after Discount Unless Grossed Up SCIN)" Value="{Binding Options.NoteAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="{Binding Options.AssetValueAfterDiscount}" Increment="100000" />
+                    <view:PercentageOptionView LabelText="Note Interest Rate&#13;(AFR Unless Grossed Up for SCIN)" Value="{Binding Options.NoteInterestRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="0.01" />
+                    <Button Name="afr_lookup" Background="LightBlue" Width="100"
+                        BorderBrush="Black" BorderThickness="1" 
+                        Click="afr_lookup_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <images:LookupIcon Width="20" Height="20"/>
+                            <TextBlock Margin="5,0,0,0" Text="Look Up AFR" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <StackPanel>
+                    <view:PercentageOptionView LabelText="Estate Tax Rate" Value="{Binding Options.EstateTaxRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="0.05" />
+                    <view:PercentageOptionView LabelText="Consumer Price Index Growth Rate" Value="{Binding Options.ConsumerPriceIndexGrowthRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="0.01" />
+                    <view:RadioButtonOptionView LabelText="Type of Note" Value="{Binding Options.NoteType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Options="{Binding Options.NoteTypes}" />
+                    <view:IntegerOptionView LabelText="Note Term&#13;(Number of Years until Balloon Payment)" Value="{Binding Options.NoteNumberOfYears, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Increment="1" />
+                    <view:IntegerOptionView LabelText="Year to Toggle Off Grantor Trust Status" Value="{Binding Options.YearToToggleOffGrantorTrustStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="-1" Maximum="{Binding Options.NumberOfYearsToProject}" Increment="1" />
+                    <view:IntegerOptionView LabelText="Number of Years to Project" Value="{Binding Options.NumberOfYearsToProject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="{Binding Options.NoteNumberOfYears}" Maximum="50" Increment="1" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

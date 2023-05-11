@@ -1,0 +1,107 @@
+﻿<Window 
+    x:Class="EstateView.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:view="clr-namespace:EstateView.View"
+    xmlns:viewModel="clr-namespace:EstateView.ViewModel"
+    xmlns:images="clr-namespace:EstateView.Images"
+    Width="1024"
+    Height="768"
+    Title="{Binding WindowTitle}"
+    Icon="Images/EstateView.ico">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:WorkspaceViewModel}">
+            <view:WorkspaceView />
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Command="{Binding NewCommand}"/>
+                <MenuItem Header="_Open" Command="{Binding OpenCommand}"/>
+                <MenuItem Header="_Save" Command="{Binding SaveCommand}"/>
+                <MenuItem Header="Save _As" Command="{Binding SaveAsCommand}"/>
+                <MenuItem Header="_Close" Command="{Binding CloseCommand}"/>
+                <Separator/>
+                <MenuItem Header="E_xit" Command="{Binding ExitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_Generate Client Letter" Command="{Binding GenerateClientLetterCommand}"/>
+                <MenuItem Header="_Installment Sale Calculator" Command="{Binding InstallmentSaleCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Help Documentation" Command="{Binding HelpDocCommand}"/>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="{Binding NewCommand}">
+                    <StackPanel Orientation="Horizontal" ToolTip="Click to clear out the current client configurations and revert to a blank form">
+                        <images:NewIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="New"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding OpenCommand}">
+                    <StackPanel Orientation="Horizontal" ToolTip="Click to open a saved client configuration">
+                        <images:OpenIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="Open"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding SaveCommand}">
+                    <StackPanel Orientation="Horizontal" ToolTip="Click to save the current client configuration">
+                        <images:SaveIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="Save"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding GenerateClientLetterCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <images:GenerateClientLetterIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="Generate Client Letter"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding SaveScreenshotCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <images:SaveScreenshotIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="Save Screenshot"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding InstallmentSaleCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <images:InstallmentSaleCalculatorIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="Installment Sale Calculator"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding AfrLookupCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <images:LookupIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="Look Up AFR"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding YouTubeCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <images:YouTubeIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="Video Tutorial"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding HelpDocCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <images:HelpIcon Width="20" Height="20"/>
+                        <TextBlock Margin="5,0,0,0" Text="EstateView Help"/>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <Grid>
+            <ContentControl Content="{Binding Workspace}" />
+        </Grid>
+    </DockPanel>
+</Window>

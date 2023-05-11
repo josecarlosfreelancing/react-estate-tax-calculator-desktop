@@ -1,0 +1,58 @@
+﻿<FlowDocument
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Paragraph>
+        <Bold>ILLUSTRATION 6 - YEAR 1 GIFT / INSTALLMENT SALE</Bold>
+        <LineBreak/>
+        <LineBreak/>
+        Here we show one of the most effective tools available to reduce Estate Tax exposure; the installment sale to an irrevocable trust.
+        <LineBreak />
+        <LineBreak />
+        The "Irrevocable Sale Trust" now shown on the right hand side can be separate and apart from you for Federal Estate
+        and Gift Tax purposes, but you will be able to pay the income tax attributable to assets held under the Trust for
+        as long as you decide. Your payment of these taxes will not be considered to be a gift for Estate and Gift Tax purposes
+        under the present law.
+        <Run Text="{Binding TrustIncomeTaxPaymentText}" />.
+        <LineBreak />
+        <LineBreak />
+        We are showing that you would make a
+        <Run Text="{Binding SeedCapitalAmount, StringFormat=C0}" />
+        seed capital gift to the trust, and shortly thereafter sell an ownership interest in an
+        LLC or Family Limited Partnership in exchange for a Promissory Note.
+        <LineBreak />
+        <LineBreak />
+        We show this as being a
+        <Run Text="{Binding SaleValueAfterDiscount, StringFormat=C0}" />
+        sale with reference to the amount of the sale, after taking into account a
+        <Run Text="{Binding NoteDiscountRate, StringFormat=P2}" />
+        valuation discount.
+        In other words,
+        <Run Text="{Binding SaleValueBeforeDiscount, StringFormat=C0}" />
+        worth of assets are involved with the underlying LLC or Family Limited Partnership interest, but based upon a
+        <Run Text="{Binding NoteDiscountRate, StringFormat=P2}" />
+        discount, this is seen as a
+        <Run Text="{Binding SaleValueAfterDiscount, StringFormat=C0}" />
+        sale.
+        <LineBreak />
+        <LineBreak />
+        <Run Text="{Binding NoteDetailsText}" />
+        <LineBreak />
+        <LineBreak />
+        As you can see, we show the sale occurring in
+        <Run Text="{Binding CurrentYear}" />, and the final results of the sale on the 2nd death in
+        <Run Text="{Binding YearOfSecondDeath}" />. 
+        At that time, the Installment Sale Trust will have
+        <Run Text="{Binding TrustValueOnSecondDeath, StringFormat=C0}" />.
+        of assets that can pass estate tax free into
+        trusts for your children or others that can benefit them during their lifetimes, but will never be subject to
+        estate tax upon their eventual deaths.
+        <LineBreak />
+        <LineBreak />
+        The total estate tax savings from this technique would be
+        <Run Text="{Binding EstateTaxSavings, StringFormat=C0}" /> .
+        based upon the assumptions set forth herein.
+    </Paragraph>
+</FlowDocument>

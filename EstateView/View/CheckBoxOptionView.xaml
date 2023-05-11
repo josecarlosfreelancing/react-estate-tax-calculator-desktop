@@ -1,0 +1,23 @@
+﻿<view:OptionView 
+    x:Class="EstateView.View.CheckBoxOptionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:view="clr-namespace:EstateView.View"
+    xmlns:controls="clr-namespace:EstateView.Controls"
+    mc:Ignorable="d" 
+    d:DesignHeight="30" 
+    d:DesignWidth="300"
+    x:Name="this">
+    <Control.Resources>
+        <controls:BindingProxy x:Key="proxy" Data="{Binding ElementName=this}" />
+    </Control.Resources>
+
+    <CheckBox
+        Height="24"
+        Margin="3"
+        Padding="2"
+        IsChecked="{Binding ElementName=this, Path=Value, UpdateSourceTrigger=PropertyChanged}">
+    </CheckBox>
+</view:OptionView>

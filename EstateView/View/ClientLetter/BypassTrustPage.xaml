@@ -1,0 +1,43 @@
+﻿<FlowDocument
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Paragraph>
+        <Bold>ILLUSTRATION 2 - BYPASS TRUST</Bold>
+        <LineBreak />
+        <LineBreak />
+        A Bypass Trust, also known as a "Family Trust" or "Credit Shelter Trust" is used to protect
+        the assets of the first dying spouse from tax at the death of the surviving spouse, while
+        still providing support for the surviving spouse.  At the first death, the property that
+        would go to the surviving spouse is given up, or disclaimed, by the surviving spouse.  
+        Then, estate planning mechanisms made in advance will move the property into a Bypass Trust.
+        <LineBreak />
+        <LineBreak />
+        Once placed in the trust, the assets can be placed in a separate trust called a Generation
+        Skipping Trust, to benefit descendants who are more than one generation level from the
+        grantor (i.e. a grandchild).  An estate planning professional would be able to discuss further options.
+        <LineBreak />
+        <LineBreak />
+        Here we show the funding of a Bypass Trust on the first death.  In this illustration, the deceased
+        spouse's estate tax exclusion is used to the extent of
+        <Run Text="{Binding InitialBypassTrustValue, StringFormat=C0}" />
+        by the funding of the Bypass Trust shown in the second column, on
+        <Run Text="{Binding Spouse1FirstName}" />'s
+        death in
+        <Run Text="{Binding YearOfFirstSpousesDeath}" />.
+        <LineBreak />
+        <LineBreak />
+        Under this scenario, the Bypass Trust grows to
+        <Run Text="{Binding FinalBypassTrustValue, StringFormat=C0}" />,
+        based upon the
+        <Run Text="{Binding InvestmentsNetGrowthRate, StringFormat=\{0:0.00%\}}" />
+        net rate of return assumption, and will not be subject to federal estate tax on the second death.
+        <LineBreak />
+        <LineBreak />
+        This saves
+        <Run Text="{Binding EstateTaxSavingsFromBypassTrust, StringFormat=C0}" />
+        in federal estate tax.
+    </Paragraph>
+</FlowDocument>

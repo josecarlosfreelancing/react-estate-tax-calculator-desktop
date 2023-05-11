@@ -1,0 +1,43 @@
+﻿<ResourceDictionary
+    x:Class="EstateView.Themes.Default.DefaultPageStyles"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModel="clr-namespace:EstateView.ViewModel">
+
+    <Style x:Key="PageGrid" TargetType="Grid">
+        <Setter Property="MinWidth" Value="500" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Margin" Value="10,10,10,10" />
+    </Style>
+
+    <DataTemplate x:Key="OptionsInHeaderTemplate" DataType="viewModel:OptionsViewModel">
+        <DataTemplate.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Style>
+        </DataTemplate.Resources>
+
+        <StackPanel>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1} Life Expectancy is {2} Years">
+                        <Binding Path="Spouse1.FirstName" />
+                        <Binding Path="Spouse1.LastName" />
+                        <Binding Path="Spouse1.LifeExpectancyNumber" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1} Life Expectancy is {2} Years">
+                        <Binding Path="Spouse2.FirstName" />
+                        <Binding Path="Spouse2.LastName" />
+                        <Binding Path="Spouse2.LifeExpectancyNumber" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>
